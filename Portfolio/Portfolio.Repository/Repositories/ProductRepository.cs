@@ -5,42 +5,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Portfolio.DataAccessLayer.DomainClasses;
+using Portfolio.DataAccessLayer;
 
 namespace Portfolio.Repository.Repositories
 {
     public class ProductRepository : IProduct
     {
+        CatalogDbContext dbContext = new CatalogDbContext();
         public IQueryable<Product> All
         {
             get
             {
-                throw new NotImplementedException();
+                return dbContext.Products;
             }
         }
 
         public void Delete(Product entity)
         {
-            throw new NotImplementedException();
+            var delProd = Find(entity.Id);
+            dbContext.Products.Remove(delProd);
+            Save();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            dbContext.Dispose();
         }
 
         public Product Find(int id)
         {
-            throw new NotImplementedException();
+            return dbContext.Products.Find(id);
         }
 
         public void InsertOrUpdate(Product entity)
         {
-            throw new NotImplementedException();
+            var existingProd = dbContext.Products.Where(x => x.Id == entity.Id).FirstOrDefault();
+            if (existingProd == null)
+            {
+                dbContext.Products.Add(entity);
+            }
+            else
+            {
+                existingProd.Id = entity.Id;
+                existingProd.CatalogId = entity.CatalogId;
+                existingProd.DepartmentId = entity.DepartmentId;
+                existingProd.VendorId = entity.VendorId;
+                existingProd.Title = entity.Title;
+                existingProd.Price = entity.Price;
+                existingProd.ItemsInStock = entity.ItemsInStock;
+                existingProd.Department = entity.Department;
+                existingProd.Vendor = entity.Vendor;
+            }
+            Save();
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            dbContext.SaveChanges();
         }
     }
 }
