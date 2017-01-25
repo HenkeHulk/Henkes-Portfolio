@@ -5,42 +5,59 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Portfolio.DataAccessLayer.DomainClasses;
+using Portfolio.DataAccessLayer;
 
 namespace Portfolio.Repository.Repositories
 {
     public class ContactRepository : IContact
     {
+        CatalogDbContext dbContext = new CatalogDbContext();
         public IQueryable<Contact> All
         {
             get
             {
-                throw new NotImplementedException();
+                return dbContext.Contacts;
             }
         }
 
         public void Delete(Contact entity)
         {
-            throw new NotImplementedException();
+            var delContact = Find(entity.Id);
+            dbContext.Contacts.Remove(delContact);
+            Save();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            dbContext.Dispose();
         }
 
         public Contact Find(int id)
         {
-            throw new NotImplementedException();
+            return dbContext.Contacts.Find(id);
         }
 
         public void InsertOrUpdate(Contact entity)
         {
-            throw new NotImplementedException();
+            var existingContact = All.Where(x => x.Id == entity.Id).FirstOrDefault();
+            if (existingContact == null)
+            {
+                dbContext.Contacts.Add(entity);
+            }
+            else
+            {
+                existingContact.Id = entity.Id;
+                existingContact.FirstName = entity.FirstName;
+                existingContact.SureName = entity.SureName;
+                existingContact.EmailAddress = entity.EmailAddress;
+                existingContact.VendorId = entity.VendorId;
+            }
+            Save();
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            dbContext.SaveChanges();
         }
     }
 }

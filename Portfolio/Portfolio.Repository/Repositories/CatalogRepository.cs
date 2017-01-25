@@ -5,42 +5,59 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Portfolio.DataAccessLayer.DomainClasses;
+using Portfolio.DataAccessLayer;
 
 namespace Portfolio.Repository.Repositories
 {
     public class CatalogRepository : ICatalog
     {
+        CatalogDbContext dbContext = new CatalogDbContext();
         public IQueryable<Catalog> All
         {
             get
             {
-                throw new NotImplementedException();
+                return dbContext.Catalog;
             }
         }
 
         public void Delete(Catalog entity)
         {
-            throw new NotImplementedException();
+            var delCatalog = Find(entity.Id);
+            dbContext.Catalog.Remove(delCatalog);
+            Save();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            dbContext.Dispose();
         }
 
         public Catalog Find(int id)
         {
-            throw new NotImplementedException();
+            return dbContext.Catalog.Find(id);
         }
 
         public void InsertOrUpdate(Catalog entity)
         {
-            throw new NotImplementedException();
+            var existingCatalog = All.Where(x => x.Id == entity.Id).FirstOrDefault();
+            if (existingCatalog == null)
+            {
+                dbContext.Catalog.Add(entity);
+            }
+            else
+            {
+                existingCatalog.Id = entity.Id;
+                existingCatalog.Name = entity.Name;
+                existingCatalog.Departments = entity.Departments;
+                existingCatalog.Product = entity.Product;
+                existingCatalog.Vendors = entity.Vendors;
+            }
+            Save();
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            dbContext.SaveChanges();
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Portfolio.Repository.Repositories
 
         public void InsertOrUpdate(Product entity)
         {
-            var existingProd = dbContext.Products.Where(x => x.Id == entity.Id).FirstOrDefault();
+            var existingProd = All.Where(x => x.Id == entity.Id).FirstOrDefault();
             if (existingProd == null)
             {
                 dbContext.Products.Add(entity);
