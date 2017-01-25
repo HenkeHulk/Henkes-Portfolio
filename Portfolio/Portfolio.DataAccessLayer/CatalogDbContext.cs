@@ -12,7 +12,7 @@ namespace Portfolio.DataAccessLayer
     {
         public CatalogDbContext() : base("name=CatalogDb")
         {
-
+            Database.SetInitializer(new CatalogDbContextInitializer());
         }
 
         public DbSet<Catalog> Catalog { get; set; }
