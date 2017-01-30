@@ -12,8 +12,7 @@ namespace Portfolio.WebUI.Controllers
         ProductHelper prodHelper = new ProductHelper();
         public ActionResult Index()
         {
-            var prodList = prodHelper.AllProducts().ToList();
-            return View(prodList);
+            return View();
         }
         
     }
