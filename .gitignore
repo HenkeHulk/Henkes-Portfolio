@@ -250,3 +250,10 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/Portfolio/DbTesting/Properties/AssemblyInfo.cs
+/Portfolio/DbTesting/Properties
+/Portfolio/DbTesting/Program.cs
+/Portfolio/DbTesting/packages.config
+/Portfolio/DbTesting/DbTesting.csproj
+/Portfolio/DbTesting/App.config
+/Portfolio/DbTesting
