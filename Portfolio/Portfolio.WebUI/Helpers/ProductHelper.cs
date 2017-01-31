@@ -1,4 +1,5 @@
-﻿using Portfolio.Repository.Repositories;
+﻿using Portfolio.DataAccessLayer.DomainClasses;
+using Portfolio.Repository.Repositories;
 using Portfolio.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,22 @@ namespace Portfolio.WebUI.Helpers
     public class ProductHelper
     {
         ProductRepository _prodRepo = new ProductRepository();
+
+        public void InsertOrUpdate(ProductViewModel product)
+        {
+            var dbProduct = new Product()
+            {
+                Id = product.Id,
+                CatalogId = product.CatalogId,
+                DepartmentId = product.DepartmentId,
+                ItemsInStock = product.ItemsInStock,
+                Title = product.Title,
+                Price = product.Price,
+                VendorId = product.VendorId
+            };
+            _prodRepo.InsertOrUpdate(dbProduct);
+        }
+
         public List<ProductViewModel> AllProductsByCatalogId(int catalogId)
         {
             var dbAllProductsByCatalogId = _prodRepo.All.Where(x => x.CatalogId == catalogId);
@@ -26,9 +43,7 @@ namespace Portfolio.WebUI.Helpers
                     VendorId = dbProd.VendorId,
                     Title = dbProd.Title,
                     Price = dbProd.Price,
-                    ItemsInStock = dbProd.ItemsInStock,
-                    Department = new DepartmentViewModel() { Id = dbProd.Department.Id, Name = dbProd.Department.Name },
-                    Vendor = new VendorViewModel() { Id = dbProd.Vendor.Id, Name = dbProd.Vendor.Name, City = dbProd.Vendor.City, Country = dbProd.Vendor.Country, PostalCode = dbProd.Vendor.PostalCode, Street = dbProd.Vendor.Street }
+                    ItemsInStock = dbProd.ItemsInStock
                 };
                 AllProducts.Add(Product);
             }

@@ -53,8 +53,6 @@ namespace Portfolio.Repository.Repositories
                 existingProd.Title = entity.Title;
                 existingProd.Price = entity.Price;
                 existingProd.ItemsInStock = entity.ItemsInStock;
-                existingProd.Department = entity.Department;
-                existingProd.Vendor = entity.Vendor;
             }
             Save();
         }

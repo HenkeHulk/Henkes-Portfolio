@@ -9,7 +9,7 @@ using Portfolio.DataAccessLayer;
 
 namespace Portfolio.Repository.Repositories
 {
-    public class CatalogRepository : ICatalog
+    public abstract class CatalogRepository : ICatalog
     {
         CatalogDbContext dbContext = new CatalogDbContext();
         public IQueryable<Catalog> All

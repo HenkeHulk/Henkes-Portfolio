@@ -14,10 +14,6 @@
 
         public decimal Price { get; set; }
 
-        public Department Department { get; set; }
-
         public int ItemsInStock { get; set; }
-
-        public Vendor Vendor { get; set; }
     }
 }

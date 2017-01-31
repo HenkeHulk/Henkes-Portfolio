@@ -14,10 +14,6 @@
 
         public decimal Price { get; set; }
 
-        public DepartmentViewModel Department { get; set; }
-
         public int ItemsInStock { get; set; }
-
-        public VendorViewModel Vendor { get; set; }
     }
 }
