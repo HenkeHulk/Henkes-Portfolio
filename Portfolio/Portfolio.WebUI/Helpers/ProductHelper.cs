@@ -27,6 +27,29 @@ namespace Portfolio.WebUI.Helpers
             _prodRepo.InsertOrUpdate(dbProduct);
         }
 
+        public List<ProductViewModel> AllProductsByVendorId(int vendorId)
+        {
+            var dbAllProductsByCatalogId = _prodRepo.All.Where(x => x.VendorId == vendorId);
+            var AllProducts = new List<ProductViewModel>();
+
+            foreach (var dbProd in dbAllProductsByCatalogId)
+            {
+
+                var Product = new ProductViewModel()
+                {
+                    Id = dbProd.Id,
+                    CatalogId = dbProd.CatalogId,
+                    Title = dbProd.Title,
+                    Price = dbProd.Price,
+                    ItemsInStock = dbProd.ItemsInStock,
+                    VendorId = dbProd.VendorId,
+                    DepartmentId = dbProd.DepartmentId
+                };
+                AllProducts.Add(Product);
+            }
+            return AllProducts.ToList();
+        }
+
         public List<ProductViewModel> AllProductsByCatalogId(int catalogId)
         {
             var dbAllProductsByCatalogId = _prodRepo.All.Where(x => x.CatalogId == catalogId);
@@ -39,8 +62,6 @@ namespace Portfolio.WebUI.Helpers
                 {
                     Id = dbProd.Id,
                     CatalogId = dbProd.CatalogId,
-                    DepartmentId = dbProd.DepartmentId,
-                    VendorId = dbProd.VendorId,
                     Title = dbProd.Title,
                     Price = dbProd.Price,
                     ItemsInStock = dbProd.ItemsInStock
@@ -67,8 +88,6 @@ namespace Portfolio.WebUI.Helpers
                     Title = dbProd.Title,
                     Price = dbProd.Price,
                     ItemsInStock = dbProd.ItemsInStock
-                    //Department = new DepartmentViewModel() { Id = dbProd.Department.Id, Name = dbProd.Department.Name },
-                    //Vendor = new VendorViewModel() { Id = dbProd.Vendor.Id, Name = dbProd.Vendor.Name, City = dbProd.Vendor.City, Country = dbProd.Vendor.Country, PostalCode = dbProd.Vendor.PostalCode, Street = dbProd.Vendor.Street }
                 };
                 AllProducts.Add(Product);
             }

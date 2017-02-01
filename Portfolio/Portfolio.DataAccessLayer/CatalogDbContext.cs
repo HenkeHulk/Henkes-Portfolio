@@ -33,10 +33,13 @@ namespace Portfolio.DataAccessLayer
             List<Vendor> Vendors = new List<Vendor>();
 
             Vendors.Add(new Vendor() { Name = "Anderssons Kött", Country = "Sweden", City = "Stockholm", Products = Products, Street = "Slakhusgatan 1", PostalCode = "16100" });
-            Products.Add(new Product() { CatalogId = 1, DepartmentId = 1, VendorId = 1, ItemsInStock = 2, Title = "NHL 17", Price = 699 });
+            Vendors.Add(new Vendor() { Name = "Henriks Spelbutik", Country = "Sweden", City = "Sollentuna", Products = Products, Street = "Spelvägen 1", PostalCode = "19100" });
+            Products.Add(new Product() { CatalogId = 1, DepartmentId = 3, VendorId = 2, ItemsInStock = 2, Title = "NHL 17", Price = 699 });
             Contacts.Add(new Contact() { FirstName = "Henrik", SureName = "Häggbom", EmailAddress = "henrik@haggbom.se", PhoneNumber = "08-1234567", VendorId = 1 });
             Departments.Add(new Department() { Name = "Food" });
             Departments.Add(new Department() { Name = "Sports Apparel" });
+            Departments.Add(new Department() { Name = "Video Games" });
+            Departments.Add(new Department() { Name = "TV" });
             Catalogs.Add(new Catalog() { Name = "Henkes Katalog", Product = Products, Departments = Departments, Vendors = Vendors });
 
             foreach (var vendor in Vendors)

@@ -20,15 +20,16 @@
             </tr>
         </thead>
         <tbody>
-            @*@foreach (var prod in Model.Products)
+            @foreach (var prod in Model.Products)
             {
-                <tr>
+                <tr>       
                     <td>@prod.Title</td>
                     <td>@prod.Price.ToString()</td>
-                    <td>@prod.Department.Name</td>
-                    <td>@prod.Vendor.Name</td>
+                    <td>@Model.Department.Name</td>
+                    <td>@Model.Vendor.Name</td>
+                    <td><a href="#">Details</a></td>
                 </tr>
-            }*@
+            }
         </tbody>
     </table>
 </div>
