@@ -10,6 +10,10 @@
 
         public int VendorId { get; set; }
 
+        public DepartmentViewModel Department { get; set; }
+
+        public VendorViewModel Vendor { get; set; }
+
         public string Title { get; set; }
 
         public decimal Price { get; set; }

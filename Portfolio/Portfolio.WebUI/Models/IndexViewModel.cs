@@ -9,6 +9,8 @@ namespace Portfolio.WebUI.Models
     {
         public string Name { get; set; }
 
+        public int ProductId { get; set; }
+
         public List<DepartmentViewModel> Departments { get; set; }
 
         public List<ProductViewModel> Products { get; set; }

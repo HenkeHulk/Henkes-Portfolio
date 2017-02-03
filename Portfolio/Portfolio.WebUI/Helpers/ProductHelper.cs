@@ -27,6 +27,22 @@ namespace Portfolio.WebUI.Helpers
             _prodRepo.InsertOrUpdate(dbProduct);
         }
 
+        public ProductViewModel FindProductById(int id)
+        {
+            var dbProd = _prodRepo.Find(id);
+            var product = new ProductViewModel()
+            {
+                Id = dbProd.Id,
+                CatalogId = dbProd.CatalogId,
+                DepartmentId = dbProd.DepartmentId,
+                VendorId = dbProd.VendorId,
+                ItemsInStock = dbProd.ItemsInStock,
+                Price = dbProd.Price,
+                Title = dbProd.Title
+            };
+            return product;
+        }
+
         public List<ProductViewModel> AllProductsByVendorId(int vendorId)
         {
             var dbAllProductsByCatalogId = _prodRepo.All.Where(x => x.VendorId == vendorId);

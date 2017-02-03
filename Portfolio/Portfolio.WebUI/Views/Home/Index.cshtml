@@ -5,7 +5,7 @@
 
 <div class="jumbotron">
     <h1>Product Catalog</h1>
-    <p class="lead">the Product Catalog is an ASP.NET MVC example app built using C#, Entity Framework Code First, MS SQL, LINQ, Github, JQuery, Bootstrap, CSS3, HTML5, SASS
+    <p class="lead">the Product Catalog is an ASP.NET MVC example app built using C#, Entity Framework Code First, MS SQL, LINQ, Github, JQuery, Bootstrap 4, CSS3, HTML5, SASS
 </p>
 </div>
 
@@ -17,6 +17,7 @@
                 <th>Price</th>
                 <th>Department</th>
                 <th>Vendor</th>
+                <th>Lagerstatus</th>
             </tr>
         </thead>
         <tbody>
@@ -25,11 +26,17 @@
                 <tr>       
                     <td>@prod.Title</td>
                     <td>@prod.Price.ToString()</td>
-                    <td>@Model.Department.Name</td>
-                    <td>@Model.Vendor.Name</td>
-                    <td><a href="#">Details</a></td>
+                    <td>@prod.Department.Name</td>
+                    <td>@prod.Vendor.Name</td>
+                    <td>@prod.ItemsInStock.ToString()</td>
+                    <td><a href="~/Home/Details/@prod.Id">Details</a></td>
                 </tr>
             }
         </tbody>
     </table>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a href="~/Home/AddProduct" class="btn btn-primary">Create new product</a>
+        </div>
+    </div>
 </div>

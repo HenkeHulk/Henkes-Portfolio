@@ -17,26 +17,97 @@ namespace Portfolio.WebUI.Controllers
         public ActionResult Index()
         {
             var products = prodHelper.AllProducts().ToList();
-            var modelProduct = new ProductViewModel();
             var modelProds = new List<ProductViewModel>();
+            var modelProduct = new ProductViewModel();
+
             foreach (var prod in products)
             {
-                modelProduct.Id = prod.Id;
-                modelProduct.Title = prod.Title;
-                modelProduct.Price = prod.Price;
-                modelProduct.ItemsInStock = prod.ItemsInStock;
-                modelProduct.VendorId = prod.VendorId;
-                modelProduct.DepartmentId = prod.DepartmentId;
-
+                var deptById = deptHelper.FindDepartment(prod.DepartmentId);
+                var vendById = vendorHelper.FindVendor(prod.VendorId);
+                modelProduct = new ProductViewModel()
+                {
+                    Id = prod.Id,
+                    Title = prod.Title,
+                    Price = prod.Price,
+                    ItemsInStock = prod.ItemsInStock,
+                    VendorId = prod.VendorId,
+                    DepartmentId = prod.DepartmentId,
+                    Department = deptById,
+                    Vendor = vendById      
+                };
                 modelProds.Add(modelProduct);
             }
-            IndexViewModel model = new IndexViewModel()
+            var model = new IndexViewModel()
             {
-                Products = modelProds,
-                Department = deptHelper.FindDepartment(modelProduct.DepartmentId),
-                Vendor = vendorHelper.FindVendor(modelProduct.VendorId)
+                Products = modelProds
             };
+
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Details(int Id)
+        {
+            var product = prodHelper.FindProductById(Id);
+            var vendors = vendorHelper.AllVendors();
+            var departments = deptHelper.AllDepartments();
+            List<SelectListItem> vendorListItems = new List<SelectListItem>();
+            List<SelectListItem> deptListItems = new List<SelectListItem>();
+            foreach (var vendor in vendors)
+            {
+                var selectedVendor = new SelectListItem()
+                {
+                    Value = vendor.Id.ToString(),
+                    Text = vendor.Name
+                };
+                vendorListItems.Add(selectedVendor);
+            }
+
+            foreach (var dept in departments)
+            {
+                var selectedDept = new SelectListItem()
+                {
+                    Value = dept.Id.ToString(),
+                    Text = dept.Name
+                };
+                deptListItems.Add(selectedDept);
+            }
+
+
+            var modelProduct = new ProductDetailsViewModel()
+            {
+                SelectedDepartmentId = product.DepartmentId,
+                SelectedVendorId = product.VendorId,
+                Id = product.Id,
+                CatalogId = product.CatalogId,
+                Price = product.Price,
+                ItemsInStock = product.ItemsInStock,
+                Title = product.Title,
+                Vendors = vendorListItems,
+                Departments = deptListItems
+            };
+
+            return View(modelProduct);
+        }
+
+        [HttpPost]
+        public ActionResult Details(ProductDetailsViewModel product)
+        {
+            var vendorsList = new List<VendorViewModel>();
+            vendorsList = vendorHelper.AllVendors();
+
+
+            var modelProduct = new ProductViewModel()
+            {
+                Id = product.Id,
+                Title = product.Title,
+                Price = product.Price,
+                ItemsInStock = product.ItemsInStock,
+                DepartmentId = product.SelectedDepartmentId,
+                VendorId = product.SelectedVendorId
+            };
+            prodHelper.InsertOrUpdate(modelProduct);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -90,7 +161,7 @@ namespace Portfolio.WebUI.Controllers
                 Price = product.Price,
                 ItemsInStock = product.ItemsInStock,
                 DepartmentId = product.SelectedDepartmentId,
-                VendorId = product.SelectedDepartmentId
+                VendorId = product.SelectedVendorId
             };
             prodHelper.InsertOrUpdate(modelProduct);
             return RedirectToAction("Index");
