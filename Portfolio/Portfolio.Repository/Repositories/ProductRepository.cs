@@ -47,7 +47,6 @@ namespace Portfolio.Repository.Repositories
             else
             {
                 existingProd.Id = entity.Id;
-                existingProd.CatalogId = entity.CatalogId;
                 existingProd.DepartmentId = entity.DepartmentId;
                 existingProd.VendorId = entity.VendorId;
                 existingProd.Title = entity.Title;

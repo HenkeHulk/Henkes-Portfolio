@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CatalogDbContext.cs" />
-    <Compile Include="DomainClasses\Catalog.cs" />
     <Compile Include="DomainClasses\Contact.cs" />
     <Compile Include="DomainClasses\Product.cs" />
     <Compile Include="DomainClasses\Department.cs" />

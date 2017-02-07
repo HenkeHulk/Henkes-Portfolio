@@ -10,8 +10,6 @@ namespace Portfolio.WebUI.Models
     {
         public int Id { get; set; }
 
-        public int CatalogId { get; set; }
-
         public int SelectedDepartmentId { get; set; }
 
         public int SelectedVendorId { get; set; }

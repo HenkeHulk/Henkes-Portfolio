@@ -16,7 +16,6 @@
                 <th>Title</th>
                 <th>Price</th>
                 <th>Department</th>
-                <th>Vendor</th>
                 <th>Lagerstatus</th>
             </tr>
         </thead>
@@ -27,16 +26,15 @@
                     <td>@prod.Title</td>
                     <td>@prod.Price.ToString()</td>
                     <td>@prod.Department.Name</td>
-                    <td>@prod.Vendor.Name</td>
                     <td>@prod.ItemsInStock.ToString()</td>
-                    <td><a href="~/Home/Details/@prod.Id">Details</a></td>
+                    <td><a href="#">Add to cart</a></td>
                 </tr>
             }
         </tbody>
     </table>
-    <div class="form-group">
+    @*<div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <a href="~/Home/AddProduct" class="btn btn-primary">Create new product</a>
         </div>
-    </div>
+    </div>*@
 </div>

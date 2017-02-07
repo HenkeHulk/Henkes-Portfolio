@@ -17,7 +17,6 @@ namespace Portfolio.WebUI.Helpers
             var dbProduct = new Product()
             {
                 Id = product.Id,
-                CatalogId = product.CatalogId,
                 DepartmentId = product.DepartmentId,
                 ItemsInStock = product.ItemsInStock,
                 Title = product.Title,
@@ -33,7 +32,6 @@ namespace Portfolio.WebUI.Helpers
             var product = new ProductViewModel()
             {
                 Id = dbProd.Id,
-                CatalogId = dbProd.CatalogId,
                 DepartmentId = dbProd.DepartmentId,
                 VendorId = dbProd.VendorId,
                 ItemsInStock = dbProd.ItemsInStock,
@@ -54,33 +52,11 @@ namespace Portfolio.WebUI.Helpers
                 var Product = new ProductViewModel()
                 {
                     Id = dbProd.Id,
-                    CatalogId = dbProd.CatalogId,
                     Title = dbProd.Title,
                     Price = dbProd.Price,
                     ItemsInStock = dbProd.ItemsInStock,
                     VendorId = dbProd.VendorId,
                     DepartmentId = dbProd.DepartmentId
-                };
-                AllProducts.Add(Product);
-            }
-            return AllProducts.ToList();
-        }
-
-        public List<ProductViewModel> AllProductsByCatalogId(int catalogId)
-        {
-            var dbAllProductsByCatalogId = _prodRepo.All.Where(x => x.CatalogId == catalogId);
-            var AllProducts = new List<ProductViewModel>();
-
-            foreach (var dbProd in dbAllProductsByCatalogId)
-            {
-
-                var Product = new ProductViewModel()
-                {
-                    Id = dbProd.Id,
-                    CatalogId = dbProd.CatalogId,
-                    Title = dbProd.Title,
-                    Price = dbProd.Price,
-                    ItemsInStock = dbProd.ItemsInStock
                 };
                 AllProducts.Add(Product);
             }
@@ -98,7 +74,6 @@ namespace Portfolio.WebUI.Helpers
                 var Product = new ProductViewModel()
                 {
                     Id = dbProd.Id,
-                    CatalogId = dbProd.CatalogId,
                     DepartmentId = dbProd.DepartmentId,
                     VendorId = dbProd.VendorId,
                     Title = dbProd.Title,

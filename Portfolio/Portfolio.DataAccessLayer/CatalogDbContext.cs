@@ -14,8 +14,7 @@ namespace Portfolio.DataAccessLayer
         {
             Database.SetInitializer(new CatalogDbContextInitializer());
         }
-
-        public DbSet<Catalog> Catalog { get; set; }
+        
         public DbSet<Department> Departments { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
@@ -26,7 +25,6 @@ namespace Portfolio.DataAccessLayer
     {
         protected override void Seed(CatalogDbContext context)
         {
-            List<Catalog> Catalogs = new List<Catalog>();
             List<Contact> Contacts = new List<Contact>();
             List<Department> Departments = new List<Department>();
             List<Product> Products = new List<Product>();
@@ -34,13 +32,12 @@ namespace Portfolio.DataAccessLayer
 
             Vendors.Add(new Vendor() { Name = "Anderssons Kött", Country = "Sweden", City = "Stockholm", Products = Products, Street = "Slakhusgatan 1", PostalCode = "16100" });
             Vendors.Add(new Vendor() { Name = "Henriks Spelbutik", Country = "Sweden", City = "Sollentuna", Products = Products, Street = "Spelvägen 1", PostalCode = "19100" });
-            Products.Add(new Product() { CatalogId = 1, DepartmentId = 3, VendorId = 2, ItemsInStock = 2, Title = "NHL 17", Price = 699 });
+            Products.Add(new Product() { DepartmentId = 3, VendorId = 2, ItemsInStock = 2, Title = "NHL 17", Price = 699 });
             Contacts.Add(new Contact() { FirstName = "Henrik", SureName = "Häggbom", EmailAddress = "henrik@haggbom.se", PhoneNumber = "08-1234567", VendorId = 1 });
             Departments.Add(new Department() { Name = "Food" });
             Departments.Add(new Department() { Name = "Sports Apparel" });
             Departments.Add(new Department() { Name = "Video Games" });
             Departments.Add(new Department() { Name = "TV" });
-            Catalogs.Add(new Catalog() { Name = "Henkes Katalog", Product = Products, Departments = Departments, Vendors = Vendors });
 
             foreach (var vendor in Vendors)
                 context.Vendors.Add(vendor);
@@ -53,11 +50,6 @@ namespace Portfolio.DataAccessLayer
 
             foreach (var department in Departments)
                 context.Departments.Add(department);
-
-            foreach (var catalog in Catalogs)
-                context.Catalog.Add(catalog);
-
-
 
             base.Seed(context);
         }

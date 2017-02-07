@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace Portfolio.WebUI.Models
@@ -7,10 +8,10 @@ namespace Portfolio.WebUI.Models
     {
         public int Id { get; set; }
 
-        public int CatalogId { get; set; }
-
+        [Display(Name = "Department")]
         public int SelectedDepartmentId { get; set; }
 
+        [Display(Name = "Vendor")]
         public int SelectedVendorId { get; set; }
 
         public IEnumerable<SelectListItem> Departments { get; set; }

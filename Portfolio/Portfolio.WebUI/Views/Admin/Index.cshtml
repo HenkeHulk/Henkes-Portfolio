@@ -1,0 +1,71 @@
+﻿@model Portfolio.WebUI.Models.AdminIndexViewModel
+@{
+    ViewBag.Title = "Admin Homepage";
+}
+
+<div class="jumbotron">
+    <h1>Catalog Admin Panel</h1>
+</div>
+
+
+<div class="container">
+    <ul class="nav admin-nav">
+        <li class="nav-item admin-nav-item">
+            <a class="nav-link btn btn-primary" href="~/Vendor/AddVendor">Add new vendor</a>
+        </li>
+        <li class="nav-item admin-nav-item">
+            <a class="nav-link btn btn-primary" href="#">Add new department</a>
+        </li>
+        <li class="nav-item admin-nav-item">
+            <a class="nav-link btn btn-primary" href="~/Product/AddProduct">Add new product</a>
+        </li>
+    </ul>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Department</th>
+                <th>Vendor</th>
+                <th>Lagerstatus</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prod in Model.Products)
+            {
+                <tr>
+                    <td>@prod.Title</td>
+                    <td>@prod.Price.ToString()</td>
+                    <td>@prod.Department.Name</td>
+                    <td>@prod.Vendor.Name</td>
+                    <td>@prod.ItemsInStock.ToString()</td>
+                    <td><a href="~/Product/Details/@prod.Id">Details</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Street</th>
+                <th>Address</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vendor in Model.Vendors)
+            {
+                <tr>
+                    <td>@vendor.Name</td>
+                    <td>@vendor.Street</td>
+                    <td>@vendor.PostalCode @vendor.City</td>
+                    <td>@vendor.Country</td>
+                    <td><a href="#">Details</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -1,4 +1,5 @@
-﻿using Portfolio.Repository.Repositories;
+﻿using Portfolio.DataAccessLayer.DomainClasses;
+using Portfolio.Repository.Repositories;
 using Portfolio.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,48 @@ namespace Portfolio.WebUI.Helpers
     {
         VendorRepository _vRepo = new VendorRepository();
         ProductHelper pHelper = new ProductHelper();
+
+        public void InsertOrUpdate(VendorViewModel vendor)
+        {
+            if (vendor.Contact != null)
+            {
+                var dbContact = new Contact()
+                {
+                    Id = vendor.Contact.Id,
+                    EmailAddress = vendor.Contact.EmailAddress,
+                    FirstName = vendor.Contact.FirstName,
+                    SureName = vendor.Contact.SureName,
+                    PhoneNumber = vendor.Contact.PhoneNumber,
+                    VendorId = vendor.Id
+                };
+                var dbVendor = new Vendor()
+                {
+                    Id = vendor.Id,
+                    Name = vendor.Name,
+                    City = vendor.City,
+                    Street = vendor.Street,
+                    Country = vendor.Country,
+                    PostalCode = vendor.PostalCode,
+                    Contact = dbContact
+                };
+                _vRepo.InsertOrUpdate(dbVendor);
+            }
+            else
+            {
+                var dbVendor = new Vendor()
+                {
+                    Id = vendor.Id,
+                    Name = vendor.Name,
+                    City = vendor.City,
+                    Street = vendor.Street,
+                    Country = vendor.Country,
+                    PostalCode = vendor.PostalCode
+                };
+                _vRepo.InsertOrUpdate(dbVendor);
+            }
+            
+            
+        }
 
         public VendorViewModel FindVendor(int id)
         {

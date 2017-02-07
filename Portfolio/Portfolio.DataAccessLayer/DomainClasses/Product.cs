@@ -4,8 +4,6 @@
     {
         public int Id { get; set; }
 
-        public int CatalogId { get; set; }
-
         public int DepartmentId { get; set; }
 
         public int VendorId { get; set; }

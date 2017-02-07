@@ -8,17 +8,21 @@ using System.Web.Mvc;
 
 namespace Portfolio.WebUI.Controllers
 {
-    public class HomeController : Controller
+    public class AdminController : Controller
     {
         ProductHelper prodHelper = new ProductHelper();
         VendorHelper vendorHelper = new VendorHelper();
         DepartmentHelper deptHelper = new DepartmentHelper();
-
+        
         public ActionResult Index()
         {
             var products = prodHelper.AllProducts().ToList();
             var modelProds = new List<ProductViewModel>();
             var modelProduct = new ProductViewModel();
+
+            var vendors = vendorHelper.AllVendors().ToList();
+            var modelVendors = new List<VendorViewModel>();
+            var modelvendor = new VendorViewModel();
 
             foreach (var prod in products)
             {
@@ -33,17 +37,35 @@ namespace Portfolio.WebUI.Controllers
                     VendorId = prod.VendorId,
                     DepartmentId = prod.DepartmentId,
                     Department = deptById,
-                    Vendor = vendById      
+                    Vendor = vendById
                 };
                 modelProds.Add(modelProduct);
             }
-            var model = new IndexViewModel()
+            foreach (var vend in vendors)
             {
+                modelvendor = new VendorViewModel()
+                {
+                    Id = vend.Id,
+                    City = vend.City,
+                    Country = vend.Country,
+                    Name = vend.Name,
+                    PostalCode = vend.PostalCode,
+                    Street = vend.Street
+                };
+                modelVendors.Add(modelvendor);
+            }
+
+            var model = new AdminIndexViewModel()
+            {
+                Vendors = modelVendors,
                 Products = modelProds
             };
 
             return View(model);
         }
 
+        
+
+        
     }
 }
