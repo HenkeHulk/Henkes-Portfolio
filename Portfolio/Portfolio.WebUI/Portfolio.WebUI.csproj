@@ -149,12 +149,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ContactHelper.cs" />
     <Compile Include="Helpers\DepartmentHelper.cs" />
     <Compile Include="Helpers\ProductHelper.cs" />
     <Compile Include="Helpers\VendorHelper.cs" />
@@ -242,6 +244,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Vendor\AddVendor.cshtml" />
     <Content Include="Views\Vendor\Details.cshtml" />
+    <Content Include="Views\Contact\AddContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

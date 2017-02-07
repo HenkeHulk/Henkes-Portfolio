@@ -28,6 +28,14 @@
                 </div>
             </div>
         }
+        else
+        {
+            <div class="form-group">
+                <div class="col-md-10">
+                    <a class="nav-link btn btn-primary" href="~/Contact/AddContact/@Model.Id">Add Contact</a>
+                </div>
+            </div>
+        }
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
