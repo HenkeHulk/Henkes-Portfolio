@@ -24,6 +24,10 @@ namespace Portfolio.WebUI.Controllers
             var modelVendors = new List<VendorViewModel>();
             var modelvendor = new VendorViewModel();
 
+            var depts = deptHelper.AllDepartments().ToList();
+            var modelDepts = new List<DepartmentViewModel>();
+            var modelDept = new DepartmentViewModel();
+
             foreach (var prod in products)
             {
                 var deptById = deptHelper.FindDepartment(prod.DepartmentId);
@@ -50,13 +54,25 @@ namespace Portfolio.WebUI.Controllers
                     Country = vend.Country,
                     Name = vend.Name,
                     PostalCode = vend.PostalCode,
-                    Street = vend.Street
+                    Street = vend.Street,
+                    ContactId = vend.ContactId
                 };
                 modelVendors.Add(modelvendor);
             }
+            foreach (var dept in depts)
+            {
+                modelDept = new DepartmentViewModel()
+                {
+                    Id = dept.Id,
+                    Name = dept.Name
+                };
+                modelDepts.Add(modelDept);
+            }
+
 
             var model = new AdminIndexViewModel()
             {
+                Departments = modelDepts,
                 Vendors = modelVendors,
                 Products = modelProds
             };

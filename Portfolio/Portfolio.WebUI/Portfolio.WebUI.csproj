@@ -150,6 +150,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Helpers\VendorHelper.cs" />
     <Compile Include="Models\AdminIndexViewModel.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
+    <Compile Include="Models\DepartmentDetailsViewModel.cs" />
     <Compile Include="Models\DepartmentViewModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\AddProductViewModel.cs" />
@@ -245,6 +247,8 @@
     <Content Include="Views\Vendor\AddVendor.cshtml" />
     <Content Include="Views\Vendor\Details.cshtml" />
     <Content Include="Views\Contact\AddContact.cshtml" />
+    <Content Include="Views\Department\AddDepartment.cshtml" />
+    <Content Include="Views\Department\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

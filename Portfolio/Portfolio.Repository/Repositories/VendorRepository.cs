@@ -51,7 +51,7 @@ namespace Portfolio.Repository.Repositories
                 existingVendor.PostalCode = entity.PostalCode;
                 existingVendor.City = entity.City;
                 existingVendor.Country = entity.Country;
-                existingVendor.Contact = entity.Contact;
+                existingVendor.ContactId = entity.ContactId;
             }
             Save();
         }

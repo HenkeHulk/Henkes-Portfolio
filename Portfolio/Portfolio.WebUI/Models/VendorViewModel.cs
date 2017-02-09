@@ -8,6 +8,8 @@ namespace Portfolio.WebUI.Models
 
         public string Name { get; set; }
 
+        public int ContactId { get; set; }
+
         public ContactViewModel Contact { get; set; }
 
         public List<ProductViewModel> Products { get; set; }

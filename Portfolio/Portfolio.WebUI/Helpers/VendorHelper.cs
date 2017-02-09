@@ -15,17 +15,6 @@ namespace Portfolio.WebUI.Helpers
 
         public void InsertOrUpdate(VendorViewModel vendor)
         {
-            if (vendor.Contact != null)
-            {
-                var dbContact = new Contact()
-                {
-                    Id = vendor.Contact.Id,
-                    EmailAddress = vendor.Contact.EmailAddress,
-                    FirstName = vendor.Contact.FirstName,
-                    SureName = vendor.Contact.SureName,
-                    PhoneNumber = vendor.Contact.PhoneNumber,
-                    VendorId = vendor.Id
-                };
                 var dbVendor = new Vendor()
                 {
                     Id = vendor.Id,
@@ -33,26 +22,17 @@ namespace Portfolio.WebUI.Helpers
                     City = vendor.City,
                     Street = vendor.Street,
                     Country = vendor.Country,
-                    PostalCode = vendor.PostalCode,
-                    Contact = dbContact
-                };
-                _vRepo.InsertOrUpdate(dbVendor);
-            }
-            else
-            {
-                var dbVendor = new Vendor()
-                {
-                    Id = vendor.Id,
-                    Name = vendor.Name,
-                    City = vendor.City,
-                    Street = vendor.Street,
-                    Country = vendor.Country,
+                    ContactId = vendor.ContactId,
                     PostalCode = vendor.PostalCode
+                    
                 };
-                _vRepo.InsertOrUpdate(dbVendor);
-            }
-            
-            
+                _vRepo.InsertOrUpdate(dbVendor);   
+        }
+
+        public void DeleteVendor(int id)
+        {
+            var delVendor = _vRepo.Find(id);
+            _vRepo.Delete(delVendor);
         }
 
         public VendorViewModel FindVendor(int id)
@@ -61,6 +41,7 @@ namespace Portfolio.WebUI.Helpers
             var vendor = new VendorViewModel()
             {
                 Id = dbVendor.Id,
+                ContactId = dbVendor.ContactId,
                 Name = dbVendor.Name,
                 City = dbVendor.City,
                 Country = dbVendor.Country,
@@ -87,6 +68,7 @@ namespace Portfolio.WebUI.Helpers
                     Country = _vendor.Country,
                     Name = _vendor.Name,
                     PostalCode = _vendor.PostalCode,
+                    ContactId = _vendor.ContactId,
                     Products = productsByVendorId
                 };
                 vendors.Add(vendor);

@@ -75,7 +75,7 @@ namespace Portfolio.WebUI.Controllers
                 VendorId = product.SelectedVendorId
             };
             prodHelper.InsertOrUpdate(modelProduct);
-            return RedirectToAction("Index");
+            return Redirect("~/Admin/Index");
         }
 
         [HttpGet]
@@ -132,7 +132,7 @@ namespace Portfolio.WebUI.Controllers
                 VendorId = product.SelectedVendorId
             };
             prodHelper.InsertOrUpdate(modelProduct);
-            return RedirectToAction("Index");
+            return Redirect("~/Vendor/Details/" + modelProduct.VendorId);
         }
     }
 }

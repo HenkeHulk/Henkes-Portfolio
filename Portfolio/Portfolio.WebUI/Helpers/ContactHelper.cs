@@ -14,15 +14,38 @@ namespace Portfolio.WebUI.Helpers
         VendorHelper vendorHelper = new VendorHelper();
         public void InsertOrUpdate(ContactViewModel contactmodel)
         {
+            var vendor = vendorHelper.FindVendor(contactmodel.VendorId);
+
             var dbContact = new Contact()
             {
+                Id = contactmodel.Id,
                 VendorId = contactmodel.VendorId,
                 FirstName = contactmodel.FirstName,
                 SureName = contactmodel.SureName,
                 EmailAddress = contactmodel.EmailAddress,
                 PhoneNumber = contactmodel.PhoneNumber
             };
+            
             _cRepo.InsertOrUpdate(dbContact);
+            var addVendor = new VendorViewModel()
+            {
+                Id = vendor.Id,
+                Name = vendor.Name,
+                Contact = vendor.Contact,
+                ContactId = dbContact.Id,
+                Street = vendor.Street,
+                City = vendor.City,
+                Country = vendor.Country,
+                PostalCode = vendor.PostalCode,
+                Products = vendor.Products
+            };
+            vendorHelper.InsertOrUpdate(addVendor);
+        }
+
+        public void DeleteContact(int id)
+        {
+            var delContact = _cRepo.Find(id);
+            _cRepo.Delete(delContact);
         }
 
 
@@ -31,7 +54,6 @@ namespace Portfolio.WebUI.Helpers
             var dbContact = _cRepo.Find(id);
             var contact = new ContactViewModel()
             {
-                Id = dbContact.Id,
                 FirstName = dbContact.FirstName,
                 SureName = dbContact.SureName,
                 EmailAddress = dbContact.EmailAddress,
@@ -44,7 +66,7 @@ namespace Portfolio.WebUI.Helpers
         public ContactViewModel FindContactByVendorId(int id)
         {
             var vendor = vendorHelper.FindVendor(id);
-            var c = FindContact(vendor.Contact.Id);
+            var c = _cRepo.Find(vendor.ContactId);
             
             var contact = new ContactViewModel()
             {

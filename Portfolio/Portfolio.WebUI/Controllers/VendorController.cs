@@ -41,19 +41,38 @@ namespace Portfolio.WebUI.Controllers
         {
             var vendor = vendorHelper.FindVendor(id);
             var products = prodHelper.AllProductsByVendorId(id);
-            var contact = contactHelper.FindContactByVendorId(id);
-            VendorViewModel model = new VendorViewModel()
+            if (vendor.ContactId != 0)
             {
-                Id = vendor.Id,
-                Name = vendor.Name,
-                Street = vendor.Street,
-                PostalCode = vendor.PostalCode,
-                City = vendor.City,
-                Country = vendor.Country,
-                Contact = contact,
-                Products = products
-            };
-            return View(model);
+                var contact = contactHelper.FindContact(vendor.ContactId);
+                VendorViewModel model = new VendorViewModel()
+                {
+                    Id = vendor.Id,
+                    Name = vendor.Name,
+                    Street = vendor.Street,
+                    PostalCode = vendor.PostalCode,
+                    City = vendor.City,
+                    Country = vendor.Country,
+                    Products = products,
+                    ContactId = vendor.ContactId,
+                    Contact = contact
+                };
+                return View(model);
+            }
+            else
+            {
+                VendorViewModel model = new VendorViewModel()
+                {
+                    Id = vendor.Id,
+                    Name = vendor.Name,
+                    Street = vendor.Street,
+                    PostalCode = vendor.PostalCode,
+                    City = vendor.City,
+                    Country = vendor.Country,
+                    Products = products,
+                    ContactId = vendor.ContactId
+                };
+                return View(model);
+            }
         }
 
         [HttpPost]
@@ -62,8 +81,6 @@ namespace Portfolio.WebUI.Controllers
             var prodList = new List<ProductViewModel>();
             prodList = prodHelper.AllProductsByVendorId(vendor.Id);
 
-            if (vendor.Contact != null)
-            {
                 var modelVendor = new VendorViewModel()
                 {
                     Id = vendor.Id,
@@ -73,25 +90,10 @@ namespace Portfolio.WebUI.Controllers
                     PostalCode = vendor.PostalCode,
                     City = vendor.City,
                     Country = vendor.Country,
-                    Contact = vendor.Contact
+                    ContactId = vendor.ContactId
                 };
                 vendorHelper.InsertOrUpdate(modelVendor);
-            }
-            else
-            {
-                var modelVendor = new VendorViewModel()
-                {
-                    Id = vendor.Id,
-                    Name = vendor.Name,
-                    Products = prodList,
-                    Street = vendor.Street,
-                    PostalCode = vendor.PostalCode,
-                    City = vendor.City,
-                    Country = vendor.Country
-                };
-                vendorHelper.InsertOrUpdate(modelVendor);
-            }
-            
+                        
             return Redirect("~/Admin/Index");
         }
     }

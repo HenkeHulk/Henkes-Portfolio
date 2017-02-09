@@ -1,4 +1,5 @@
-﻿using Portfolio.Repository.Repositories;
+﻿using Portfolio.DataAccessLayer.DomainClasses;
+using Portfolio.Repository.Repositories;
 using Portfolio.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,22 @@ namespace Portfolio.WebUI.Helpers
     public class DepartmentHelper
     {
         DepartmentRepository _deptRepo = new DepartmentRepository();
+
+        public void InsertOrUpdate(DepartmentViewModel dept)
+        {
+            var dbDept = new Department()
+            {
+                Id = dept.Id,
+                Name = dept.Name
+            };
+            _deptRepo.InsertOrUpdate(dbDept);
+        }
+
+        public void DeleteDepartment(int id)
+        {
+            var delDept = _deptRepo.Find(id);
+            _deptRepo.Delete(delDept);
+        }
 
         public DepartmentViewModel FindDepartment(int id)
         {

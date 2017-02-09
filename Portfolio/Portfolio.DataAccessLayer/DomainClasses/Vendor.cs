@@ -8,7 +8,7 @@ namespace Portfolio.DataAccessLayer.DomainClasses
 
         public string Name { get; set; }
 
-        public Contact Contact { get; set; }
+        public int ContactId { get; set; }
 
         public IEnumerable<Product> Products { get; set; }
 

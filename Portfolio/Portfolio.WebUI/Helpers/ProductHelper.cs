@@ -26,6 +26,12 @@ namespace Portfolio.WebUI.Helpers
             _prodRepo.InsertOrUpdate(dbProduct);
         }
 
+        public void DeleteProduct(int id)
+        {
+            var delProd = _prodRepo.Find(id);
+            _prodRepo.Delete(delProd);
+        }
+
         public ProductViewModel FindProductById(int id)
         {
             var dbProd = _prodRepo.Find(id);

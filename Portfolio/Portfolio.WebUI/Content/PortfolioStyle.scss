@@ -17,3 +17,21 @@
         }
     }
 }
+
+.divider{
+    margin-bottom: 15px;
+    margin-top: 15px;
+    .list-group{
+        width: 225px;
+        div{
+            float: left;
+            text-align: left;
+            margin-right: 5px;
+        }
+        span{
+            float: right;
+            text-align: right;
+        }
+    }
+}
+
