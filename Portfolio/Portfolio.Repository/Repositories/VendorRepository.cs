@@ -23,6 +23,8 @@ namespace Portfolio.Repository.Repositories
         public void Delete(Vendor entity)
         {
             var delVendor = Find(entity.Id);
+            dbContext.Vendors.Remove(delVendor);
+            Save();
         }
 
         public void Dispose()

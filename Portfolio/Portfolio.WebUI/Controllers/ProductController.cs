@@ -134,5 +134,12 @@ namespace Portfolio.WebUI.Controllers
             prodHelper.InsertOrUpdate(modelProduct);
             return Redirect("~/Vendor/Details/" + modelProduct.VendorId);
         }
+
+        public ActionResult DeleteProduct(int Id)
+        {
+            var delProd = prodHelper.FindProductById(Id);
+            prodHelper.DeleteProduct(delProd.Id);
+            return Redirect("~/Vendor/Details/" + delProd.VendorId);
+        }
     }
 }

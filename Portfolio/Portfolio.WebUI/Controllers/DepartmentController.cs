@@ -73,5 +73,12 @@ namespace Portfolio.WebUI.Controllers
             deptHelper.InsertOrUpdate(dept);
             return Redirect("~/Admin/Index");
         }
+
+        public ActionResult DeleteDepartment(int Id)
+        {
+            var delDept = deptHelper.FindDepartment(Id);
+            deptHelper.DeleteDepartment(delDept.Id);
+            return Redirect("~/Admin/Index");
+        }
     }
 }

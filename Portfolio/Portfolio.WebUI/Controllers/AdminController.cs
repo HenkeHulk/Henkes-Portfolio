@@ -28,6 +28,7 @@ namespace Portfolio.WebUI.Controllers
             var modelDepts = new List<DepartmentViewModel>();
             var modelDept = new DepartmentViewModel();
 
+
             foreach (var prod in products)
             {
                 var deptById = deptHelper.FindDepartment(prod.DepartmentId);
@@ -47,17 +48,44 @@ namespace Portfolio.WebUI.Controllers
             }
             foreach (var vend in vendors)
             {
-                modelvendor = new VendorViewModel()
+                if (vend.Contact != null)
                 {
-                    Id = vend.Id,
-                    City = vend.City,
-                    Country = vend.Country,
-                    Name = vend.Name,
-                    PostalCode = vend.PostalCode,
-                    Street = vend.Street,
-                    ContactId = vend.ContactId
-                };
-                modelVendors.Add(modelvendor);
+                    var contact = new ContactViewModel()
+                    {
+                        Id = vend.Contact.Id,
+                        VendorId = vend.Id,
+                        FirstName = vend.Contact.FirstName,
+                        SureName = vend.Contact.SureName,
+                        EmailAddress = vend.Contact.EmailAddress,
+                        PhoneNumber = vend.Contact.PhoneNumber
+                    };
+                    modelvendor = new VendorViewModel()
+                    {
+                        Id = vend.Id,
+                        City = vend.City,
+                        Country = vend.Country,
+                        Name = vend.Name,
+                        PostalCode = vend.PostalCode,
+                        Street = vend.Street,
+                        ContactId = vend.ContactId,
+                        Contact = contact
+                    };
+                    modelVendors.Add(modelvendor);
+                }
+                else
+                {
+                    modelvendor = new VendorViewModel()
+                    {
+                        Id = vend.Id,
+                        City = vend.City,
+                        Country = vend.Country,
+                        Name = vend.Name,
+                        PostalCode = vend.PostalCode,
+                        Street = vend.Street,
+                        ContactId = vend.ContactId
+                    };
+                    modelVendors.Add(modelvendor);
+                }
             }
             foreach (var dept in depts)
             {

@@ -29,6 +29,7 @@
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
+        
         @if (Model.Products != null)
         {
             <div class="form-group">
@@ -59,12 +60,19 @@
                 </div>
             </div>
         }
-        
+        @if (Model.Products.Count == 0)
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a href="~/Department/DeleteDepartment/@Model.Id" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        }
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="~/Admin/Index">Back to List</a>
 </div>
 
 @section Scripts {

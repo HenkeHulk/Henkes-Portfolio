@@ -25,6 +25,7 @@
                     <div>@Model.Contact.FirstName @Model.Contact.SureName</div>
                     <div>@Model.Contact.PhoneNumber</div>
                     <div>@Model.Contact.EmailAddress</div>
+                    <div><a class="btn btn-primary" href="~/Contact/Details/@Model.Contact.Id">Details</a></div>
                 </div>
             </div>
         }
@@ -82,7 +83,7 @@
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
-        @if (Model.Products != null)
+        @if (Model.Products.Count != 0)
         {
             <table class="table table-hover">
                 <thead>
@@ -99,17 +100,27 @@
                             <td>@prod.Title</td>
                             <td>@prod.Price</td>
                             <td>@prod.ItemsInStock.ToString()</td>
+                            <td><a href="~/Product/DeleteProduct/@prod.Id" class="btn btn-danger">Delete</a></td>
                         }
                     </tr>
                 </tbody>
             </table>
+            
         }
-        
+        else if (Model.ContactId == 0 && Model.Products.Count == 0)
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a href="~/Vendor/DeleteVendor/@Model.Id" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        }
+
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="~/Admin/Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -53,7 +53,7 @@ namespace Portfolio.WebUI.Controllers
                     City = vendor.City,
                     Country = vendor.Country,
                     Products = products,
-                    ContactId = vendor.ContactId,
+                    ContactId = contact.Id,
                     Contact = contact
                 };
                 return View(model);
@@ -69,7 +69,7 @@ namespace Portfolio.WebUI.Controllers
                     City = vendor.City,
                     Country = vendor.Country,
                     Products = products,
-                    ContactId = vendor.ContactId
+                    ContactId = vendor.ContactId,
                 };
                 return View(model);
             }
@@ -90,10 +90,18 @@ namespace Portfolio.WebUI.Controllers
                     PostalCode = vendor.PostalCode,
                     City = vendor.City,
                     Country = vendor.Country,
-                    ContactId = vendor.ContactId
+                    ContactId = vendor.ContactId,
+                    Contact = vendor.Contact
                 };
                 vendorHelper.InsertOrUpdate(modelVendor);
                         
+            return Redirect("~/Admin/Index");
+        }
+
+        public ActionResult DeleteVendor(int Id)
+        {
+            var delVendor = vendorHelper.FindVendor(Id);
+            vendorHelper.DeleteVendor(delVendor.Id);
             return Redirect("~/Admin/Index");
         }
     }

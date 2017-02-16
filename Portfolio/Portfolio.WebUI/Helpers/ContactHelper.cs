@@ -45,6 +45,20 @@ namespace Portfolio.WebUI.Helpers
         public void DeleteContact(int id)
         {
             var delContact = _cRepo.Find(id);
+            var vendor = vendorHelper.FindVendor(delContact.VendorId);
+            var modelVendor = new VendorViewModel()
+            {
+                Id = vendor.Id,
+                City = vendor.City,
+                Contact = null,
+                ContactId = 0,
+                Country = vendor.Country,
+                Name = vendor.Name,
+                PostalCode = vendor.PostalCode,
+                Products = vendor.Products,
+                Street = vendor.Street
+            };
+            vendorHelper.InsertOrUpdate(modelVendor);
             _cRepo.Delete(delContact);
         }
 
@@ -54,6 +68,7 @@ namespace Portfolio.WebUI.Helpers
             var dbContact = _cRepo.Find(id);
             var contact = new ContactViewModel()
             {
+                Id = dbContact.Id,
                 FirstName = dbContact.FirstName,
                 SureName = dbContact.SureName,
                 EmailAddress = dbContact.EmailAddress,
