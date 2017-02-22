@@ -48,6 +48,7 @@ namespace Portfolio.Repository.Repositories
             {
                 existingDept.Id = entity.Id;
                 existingDept.Name = entity.Name;
+                existingDept.ImagePath = entity.ImagePath;
             }
             Save();
         }

@@ -25,7 +25,8 @@ namespace Portfolio.WebUI.Controllers
         {
             var addDept = new DepartmentViewModel()
             {
-                Name = dept.Name
+                Name = dept.Name,
+                ImagePath = dept.ImagePath
             };
             deptHelper.InsertOrUpdate(addDept);
             return Redirect("~/Admin/Index");
@@ -56,6 +57,7 @@ namespace Portfolio.WebUI.Controllers
             {
                 Id = dept.Id,
                 Name = dept.Name,
+                ImagePath = dept.ImagePath,
                 Products = deptDetailsProds
             };
             return View(deptDetails);
@@ -68,7 +70,8 @@ namespace Portfolio.WebUI.Controllers
             var dept = new DepartmentViewModel()
             {
                 Id = deptDetails.Id,
-                Name = deptDetails.Name
+                Name = deptDetails.Name,
+                ImagePath = deptDetails.ImagePath
             };
             deptHelper.InsertOrUpdate(dept);
             return Redirect("~/Admin/Index");

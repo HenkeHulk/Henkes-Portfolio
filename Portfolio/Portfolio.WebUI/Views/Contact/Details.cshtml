@@ -57,34 +57,11 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <a data-link="~/Contact/DeleteContact/@Model.Id" href="#" id="deleteContact" class="btn btn-danger">Delete</a>
+                <a data-link="/Contact/DeleteContact/@Model.Id" href="#" id="deleteContact" class="btn btn-danger">Delete</a>
             </div>
         </div>
         
-        <script>
-            $(document).on('click', '.btn-danger', function (e) {
-                var link = $(this).attr('data-link')
-                bootbox.confirm({
-                    message: 'Are you really sure that you want to delete this contact',
-
-                    buttons: {
-                        confirm: {
-                            label: 'Yes',
-                            className: 'btn-danger'
-                        },
-                        cancel: {
-                            label: 'No',
-                            className: 'btn-default'
-                        }
-                    },
-                    callback: function(result){
-                        if (result) {
-                            document.location.href = link
-                        }
-                    }
-                })
-            })
-        </script>
+        
     </div>
 }
 
@@ -94,4 +71,28 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+                $(document).on('click', '.btn-danger', function (e) {
+                    var link = $(this).attr('data-link')
+                    bootbox.confirm({
+                        message: 'Are you really sure that you want to delete @Model.FirstName @Model.SureName?',
+
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-danger'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-default'
+                            }
+                        },
+                        callback: function(result){
+                            if (result) {
+                                document.location.href = link
+                            }
+                        }
+                    })
+                })
+    </script>
 }

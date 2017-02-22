@@ -14,10 +14,12 @@ namespace Portfolio.WebUI.Helpers
 
         public void InsertOrUpdate(DepartmentViewModel dept)
         {
+            string defaultPath = "~/Content/Images/DeptImages/";
             var dbDept = new Department()
             {
                 Id = dept.Id,
-                Name = dept.Name
+                Name = dept.Name,
+                ImagePath = defaultPath + dept.ImagePath
             };
             _deptRepo.InsertOrUpdate(dbDept);
         }
@@ -31,10 +33,12 @@ namespace Portfolio.WebUI.Helpers
         public DepartmentViewModel FindDepartment(int id)
         {
             var dbDept = _deptRepo.Find(id);
+            string defaultPath = "~/Content/Images/DeptImages/";
             var Dept = new DepartmentViewModel()
             {
                 Id = dbDept.Id,
-                Name = dbDept.Name
+                Name = dbDept.Name,
+                ImagePath = defaultPath + dbDept.ImagePath
             };
             return Dept;
         }
@@ -46,10 +50,12 @@ namespace Portfolio.WebUI.Helpers
 
             foreach (var _dept in dbDepts)
             {
+                string defaultPath = "~/Content/Images/DeptImages/";
                 var dept = new DepartmentViewModel()
                 {
                     Id = _dept.Id,
-                    Name = _dept.Name
+                    Name = _dept.Name,
+                    ImagePath = defaultPath + _dept.ImagePath
                 };
                 departments.Add(dept);
             }

@@ -93,15 +93,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                   
+        @foreach (var prod in Model.Products)
+        {
                     <tr>
-                        @foreach (var prod in Model.Products)
-                        {
-                            <td>@prod.Title</td>
-                            <td>@prod.Price</td>
-                            <td>@prod.ItemsInStock.ToString()</td>
-                            <td><a href="~/Product/DeleteProduct/@prod.Id" class="btn btn-danger">Delete</a></td>
-                        }
+                        <td>@prod.Title</td>
+                        <td>@prod.Price</td>
+                        <td>@prod.ItemsInStock.ToString()</td>
+                        <td><a href="/Product/DeleteProduct/@prod.Id" class="btn btn-danger">Delete</a></td>
                     </tr>
+        }
+                    
                 </tbody>
             </table>
             
@@ -110,7 +112,7 @@
         {
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <a href="~/Vendor/DeleteVendor/@Model.Id" class="btn btn-danger">Delete</a>
+                    <a data-link="/Vendor/DeleteVendor/@Model.Id" class="btn btn-danger">Delete</a>
                 </div>
             </div>
         }
@@ -124,4 +126,28 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+                $(document).on('click', '.btn-danger', function (e) {
+                    var link = $(this).attr('data-link')
+                    bootbox.confirm({
+                        message: 'Are you really sure that you want to delete @Model.Name from the product catalog?',
+
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-danger'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-default'
+                            }
+                        },
+                        callback: function(result){
+                            if (result) {
+                                document.location.href = link
+                            }
+                        }
+                    })
+                })
+    </script>
 }

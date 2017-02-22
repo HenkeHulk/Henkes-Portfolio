@@ -28,12 +28,13 @@ namespace Portfolio.DataAccessLayer
             List<Contact> Contacts = new List<Contact>();
             List<Department> Departments = new List<Department>();
             List<Product> Products = new List<Product>();
+            List<Product> SweDProds = new List<Product>();
             List<Vendor> Vendors = new List<Vendor>();
             var contact = new Contact()
             {
                 FirstName = "Henrik",
                 SureName = "Häggbom",
-                EmailAddress = "henrik@haggbom.se",
+                EmailAddress = "henrik@henriksspelbutik.se",
                 PhoneNumber = "08-1234567",
                 VendorId = 1
             };
@@ -41,25 +42,38 @@ namespace Portfolio.DataAccessLayer
             {
                 FirstName = "Anders",
                 SureName = "Andersson",
-                EmailAddress = "anders@anderssonkott.se",
+                EmailAddress = "anders@swedroid.se",
                 PhoneNumber = "08-1234567",
                 VendorId = 2
             };
-
-            Vendors.Add(new Vendor() { Name = "Anderssons Kött", Country = "Sweden", City = "Stockholm", Products = Products, Street = "Slakhusgatan 1", PostalCode = "16100", ContactId=2 });
+            
             Vendors.Add(new Vendor() { Name = "Henriks Spelbutik", Country = "Sweden", City = "Sollentuna", Products = Products, Street = "Spelvägen 1", PostalCode = "19100", ContactId=1 });
-            Products.Add(new Product() { DepartmentId = 3, VendorId = 2, ItemsInStock = 2, Title = "NHL 17", Price = 699 });
+            Vendors.Add(new Vendor() { Name = "SweDroid", Country = "Sweden", City = "Stockholm", Products = SweDProds, Street = "Ringvägen 25", PostalCode = "11800", ContactId = 2 });
+            Products.Add(new Product() { DepartmentId = 3, VendorId = 1, ItemsInStock = 2, Title = "NHL 17", Price = 699 });
+            Products.Add(new Product() { DepartmentId = 3, VendorId = 1, ItemsInStock = 3, Title = "FIFA 17", Price = 699 });
+            Products.Add(new Product() { DepartmentId = 3, VendorId = 1, ItemsInStock = 7, Title = "Dirt Rally", Price = 699 });
+            Products.Add(new Product() { DepartmentId = 3, VendorId = 1, ItemsInStock = 5, Title = "Lego: The Force Awakens", Price = 699 });
+            SweDProds.Add(new Product() { DepartmentId = 5, VendorId = 2, ItemsInStock = 3, Title = "SmartPhone S", Price = 2500 });
+            SweDProds.Add(new Product() { DepartmentId = 5, VendorId = 2, ItemsInStock = 3, Title = "SmartPhone", Price = 2000 });
+            SweDProds.Add(new Product() { DepartmentId = 6, VendorId = 2, ItemsInStock = 7, Title = "Smartwatch", Price = 2000 });
+            SweDProds.Add(new Product() { DepartmentId = 6, VendorId = 2, ItemsInStock = 6, Title = "Smartwatch S", Price = 2500 });
             Contacts.Add(contact);
             Contacts.Add(contact1);
-            Departments.Add(new Department() { Name = "Food" });
-            Departments.Add(new Department() { Name = "Sports Apparel" });
+            Departments.Add(new Department() { Name = "Computers & Tablets" });
+            Departments.Add(new Department() { Name = "Headphones" });
             Departments.Add(new Department() { Name = "Video Games" });
-            Departments.Add(new Department() { Name = "TV" });
+            Departments.Add(new Department() { Name = "TV & Audio" });
+            Departments.Add(new Department() { Name = "Cellphones & Accessories" });
+            Departments.Add(new Department() { Name = "Wearable electronics" });
+            Departments.Add(new Department() { Name = "Camera, Photo & Video" });
 
             foreach (var vendor in Vendors)
                 context.Vendors.Add(vendor);
 
             foreach (var product in Products)
+                context.Products.Add(product);
+
+            foreach (var product in SweDProds)
                 context.Products.Add(product);
 
             foreach (var _contact in Contacts)

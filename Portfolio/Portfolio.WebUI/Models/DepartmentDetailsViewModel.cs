@@ -11,6 +11,8 @@ namespace Portfolio.WebUI.Models
 
         public string Name { get; set; }
 
+        public string ImagePath { get; set; }
+
         public List<ProductViewModel> Products { get; set; }
     }
 }
