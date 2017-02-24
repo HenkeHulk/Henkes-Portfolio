@@ -32,6 +32,34 @@ namespace Portfolio.WebUI.Controllers
             return Redirect("~/Admin/Index");
         }
 
+        public ActionResult Index(int Id)
+        {
+            var dept = deptHelper.FindDepartment(Id);
+            var products = prodHelper.AllProducts().Where(x => x.DepartmentId == dept.Id).ToList();
+            var modelProds = new List<ProductViewModel>();
+            var modelProduct = new ProductViewModel();
+
+            foreach (var prod in products)
+            {
+                modelProduct = new ProductViewModel()
+                {
+                    Id = prod.Id,
+                    Title = prod.Title,
+                    Price = prod.Price,
+                    ItemsInStock = prod.ItemsInStock       
+                };
+                modelProds.Add(modelProduct);
+            }
+            DepartmentIndexViewModel model = new DepartmentIndexViewModel()
+            {
+                Id = dept.Id,
+                Name = dept.Name,
+                Products = modelProds
+            };
+
+            return View(model);
+        }
+
         [HttpGet]
         public ActionResult Details(int id)
         {

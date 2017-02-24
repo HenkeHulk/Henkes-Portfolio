@@ -1,4 +1,9 @@
-﻿.container{
+﻿
+
+.container{
+    .deptHeader{
+        text-align: center;
+    }
     .admin-nav{
         .admin-nav-item{
             margin-right: 3px;
@@ -34,4 +39,32 @@
         }
     }
 }
+
+.card{
+    width: 22em;
+    .card-img-top{
+        width: 100%;
+        height: 13em;
+    }
+    .card-block{
+        align-content: center;
+        text-align: center;
+    }
+}
+@media (min-width: 576px){
+.card{
+    align-content: center;
+    width: 22em;
+    .card-img-top{
+        width: 100%;
+        height: 13em;
+    }
+    .card-block{
+        align-content: center;
+        text-align: center;
+    }
+}
+}
+
+
 

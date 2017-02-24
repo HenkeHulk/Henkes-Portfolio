@@ -10,38 +10,39 @@
 </div>
 
 <div class="container">
-    <div class="card" style="width: 20rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-block">
-            <h4 class="card-title">Card title</h4>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h3 class="deptHeader">Departments</h3>
+    <div class="divider">
+        <div class="row">
+            @foreach (var dept in Model.Departments)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="card">
+                        <a href="~/Department/Index/@dept.Id"><img class="card-img-top img-fluid" src="@dept.ImagePath" alt="@dept.Name" title="@dept.Name"></a>
+                        <div class="card-block">
+                            <a href="~/Department/Index/@dept.Id" class="btn btn-primary">@dept.Name</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
         </div>
     </div>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Department</th>
-                <th>Lagerstatus</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var prod in Model.Products)
+    <hr />
+    <h3 class="deptHeader">Brands</h3>
+    <div class="divider">
+        <div class="row">
+            @foreach (var vendor in Model.Vendors)
             {
-                <tr>       
-                    <td>@prod.Title</td>
-                    <td>@prod.Price.ToString()</td>
-                    <td>@prod.Department.Name</td>
-                    <td>@prod.ItemsInStock.ToString()</td>
-                    <td><a href="#">Add to cart</a></td>
-                </tr>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="card">
+                        <a href="~/Vendor/Index/@vendor.Id"><img class="card-img-top img-fluid" src="@vendor.ImagePath" alt="@vendor.Name" title="@vendor.Name"></a>
+                        <div class="card-block">
+                            <a href="~/Vendor/Index/@vendor.Id" class="btn btn-primary">@vendor.Name</a>
+                        </div>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
-    @*<div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <a href="~/Home/AddProduct" class="btn btn-primary">Create new product</a>
         </div>
-    </div>*@
+    </div>
 </div>

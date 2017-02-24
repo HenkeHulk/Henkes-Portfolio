@@ -14,6 +14,34 @@ namespace Portfolio.WebUI.Controllers
         ProductHelper prodHelper = new ProductHelper();
         ContactHelper contactHelper = new ContactHelper();
 
+        public ActionResult Index(int Id)
+        {
+            var vendor = vendorHelper.FindVendor(Id);
+            var products = prodHelper.AllProducts().Where(x => x.VendorId == vendor.Id).ToList();
+            var modelProds = new List<ProductViewModel>();
+            var modelProduct = new ProductViewModel();
+            foreach (var prod in products)
+            {
+                modelProduct = new ProductViewModel()
+                {
+                    Id = prod.Id,
+                    Title = prod.Title,
+                    Price = prod.Price,
+                    ItemsInStock = prod.ItemsInStock
+                };
+                modelProds.Add(modelProduct);
+            }
+
+            var model = new VendorIndexViewModel()
+            {
+                Id = vendor.Id,
+                ImagePath = vendor.ImagePath,
+                Name = vendor.Name,
+                Products = modelProds
+            };
+            return View(model);
+        }
+
         [HttpGet]
         public ActionResult AddVendor()
         {

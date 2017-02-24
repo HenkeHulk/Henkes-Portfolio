@@ -10,6 +10,8 @@ namespace Portfolio.DataAccessLayer.DomainClasses
 
         public int ContactId { get; set; }
 
+        public string ImagePath { get; set; }
+
         public IEnumerable<Product> Products { get; set; }
 
         public string Street { get; set; }

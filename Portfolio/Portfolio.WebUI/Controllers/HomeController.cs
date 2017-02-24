@@ -20,6 +20,14 @@ namespace Portfolio.WebUI.Controllers
             var modelProds = new List<ProductViewModel>();
             var modelProduct = new ProductViewModel();
 
+            var vendors = vendorHelper.AllVendors().ToList();
+            var modelVendors = new List<VendorViewModel>();
+            var modelVendor = new VendorViewModel();
+
+            var depts = deptHelper.AllDepartments().ToList();
+            var modelDepts = new List<DepartmentViewModel>();
+            var modelDept = new DepartmentViewModel();
+
             foreach (var prod in products)
             {
                 var deptById = deptHelper.FindDepartment(prod.DepartmentId);
@@ -37,9 +45,33 @@ namespace Portfolio.WebUI.Controllers
                 };
                 modelProds.Add(modelProduct);
             }
+
+            foreach (var vend in vendors)
+            {
+                modelVendor = new VendorViewModel()
+                {
+                    Id = vend.Id,
+                    Name = vend.Name,
+                    ImagePath = vend.ImagePath
+                };
+                modelVendors.Add(modelVendor);
+            }
+
+            foreach (var dept in depts)
+            {
+                modelDept = new DepartmentViewModel()
+                {
+                    Id = dept.Id,
+                    ImagePath = dept.ImagePath,
+                    Name = dept.Name
+                };
+                modelDepts.Add(modelDept);
+            }
             var model = new IndexViewModel()
             {
-                Products = modelProds
+                Products = modelProds,
+                Departments = modelDepts,
+                Vendors = modelVendors
             };
 
             return View(model);

@@ -23,7 +23,8 @@ namespace Portfolio.WebUI.Helpers
                     Street = vendor.Street,
                     Country = vendor.Country,
                     ContactId = vendor.ContactId,
-                    PostalCode = vendor.PostalCode
+                    PostalCode = vendor.PostalCode,
+                    ImagePath = vendor.ImagePath
                     
                 };
                 _vRepo.InsertOrUpdate(dbVendor);   
@@ -38,6 +39,7 @@ namespace Portfolio.WebUI.Helpers
         public VendorViewModel FindVendor(int id)
         {
             var dbVendor = _vRepo.Find(id);
+            string defaultPath = "/Content/Images/VendorImages";
             var vendor = new VendorViewModel()
             {
                 Id = dbVendor.Id,
@@ -46,7 +48,8 @@ namespace Portfolio.WebUI.Helpers
                 City = dbVendor.City,
                 Country = dbVendor.Country,
                 PostalCode = dbVendor.PostalCode,
-                Street = dbVendor.Street
+                Street = dbVendor.Street,
+                ImagePath = defaultPath + dbVendor.ImagePath
             };
             return vendor;
         }
@@ -55,6 +58,7 @@ namespace Portfolio.WebUI.Helpers
         {
             var dbVendors = _vRepo.All.ToList();
             var vendors = new List<VendorViewModel>();
+            string defaultPath = "/Content/Images/VendorImages/";
 
             foreach (var _vendor in dbVendors)
             {
@@ -69,7 +73,8 @@ namespace Portfolio.WebUI.Helpers
                     Name = _vendor.Name,
                     PostalCode = _vendor.PostalCode,
                     ContactId = _vendor.ContactId,
-                    Products = productsByVendorId
+                    Products = productsByVendorId,
+                    ImagePath = defaultPath + _vendor.ImagePath
                 };
                 vendors.Add(vendor);
             }

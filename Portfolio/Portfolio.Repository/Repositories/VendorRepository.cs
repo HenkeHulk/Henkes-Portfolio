@@ -52,6 +52,7 @@ namespace Portfolio.Repository.Repositories
                 existingVendor.Street = entity.Street;
                 existingVendor.PostalCode = entity.PostalCode;
                 existingVendor.City = entity.City;
+                existingVendor.ImagePath = entity.ImagePath;
                 existingVendor.Country = entity.Country;
                 existingVendor.ContactId = entity.ContactId;
             }
