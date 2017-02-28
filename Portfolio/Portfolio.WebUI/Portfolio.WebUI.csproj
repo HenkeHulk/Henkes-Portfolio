@@ -194,6 +194,8 @@
     <Content Include="Content\Images\HH-Logo-black.png" />
     <Content Include="Content\Images\VendorImages\Android-Company-Logo.jpg" />
     <Content Include="Content\Images\VendorImages\HH-Logo-black.png" />
+    <Content Include="Content\Images\VendorImages\pear-logo.jpg" />
+    <Content Include="Content\Images\VendorImages\SanyLogo.png" />
     <Content Include="Content\PortfolioStyle.css">
       <DependentUpon>PortfolioStyle.scss</DependentUpon>
     </Content>

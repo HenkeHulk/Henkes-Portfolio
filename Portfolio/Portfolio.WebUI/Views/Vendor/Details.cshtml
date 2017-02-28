@@ -100,7 +100,7 @@
                         <td>@prod.Title</td>
                         <td>@prod.Price</td>
                         <td>@prod.ItemsInStock.ToString()</td>
-                        <td><a href="/Product/DeleteProduct/@prod.Id" class="btn btn-danger">Delete</a></td>
+                        <td><a data-link="/Product/DeleteProduct/@Model.Id" class="btn btn-danger">Delete</a></td>
                     </tr>
         }
                     
